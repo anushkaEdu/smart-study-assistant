@@ -12,8 +12,9 @@ try:
 except LookupError:
     nltk.download("punkt", download_dir=nltk_data_dir)
 
-# Load summarization model
-summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
+# Load summarization model (smaller, CPU-friendly)
+summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
+
 
 st.set_page_config(page_title="Smart Study Assistant", layout="wide")
 
