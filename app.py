@@ -1,10 +1,17 @@
 import streamlit as st
 from transformers import pipeline
 import nltk
+import os
 
-# Download NLTK resources
-nltk.download("punkt", quiet=True, download_dir="/tmp/nltk_data")
-nltk.data.path.append("/tmp/nltk_data")
+# Ensure NLTK punkt tokenizer is downloaded in a local folder
+nltk_data_dir = os.path.join(os.getcwd(), "nltk_data")
+os.makedirs(nltk_data_dir, exist_ok=True)
+nltk.data.path.append(nltk_data_dir)
+
+try:
+    nltk.data.find("tokenizers/punkt")
+except LookupError:
+    nltk.download("punkt", download_dir=nltk_data_dir)
 
 # Load summarization model
 summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
