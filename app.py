@@ -3,7 +3,8 @@ from transformers import pipeline
 import nltk
 
 # Download NLTK resources
-nltk.download("punkt", quiet=True)
+nltk.download("punkt", quiet=True, download_dir="/tmp/nltk_data")
+nltk.data.path.append("/tmp/nltk_data")
 
 # Load summarization model
 summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
