@@ -3,15 +3,14 @@ from transformers import pipeline
 import nltk
 import os
 
-# Make sure nltk downloads punkt to a temporary folder (works on Streamlit Cloud)
 nltk_data_dir = "/tmp/nltk_data"
+os.makedirs(nltk_data_dir, exist_ok=True)
 nltk.data.path.append(nltk_data_dir)
 
 try:
     nltk.data.find("tokenizers/punkt")
 except LookupError:
     nltk.download("punkt", download_dir=nltk_data_dir)
-
 
 # Load summarization model
 summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
